@@ -79,8 +79,8 @@ class Blockchain {
              block.height = self.chain.length;
              block.hash = SHA256(JSON.stringify(block)).toString();
              self.chain.push(block);
-             let isChainValid = await this.validateChain();
-             if (isChainValid) {
+             let chainValidation = await this.validateChain();
+             if (chainValidation && chainValidation.success) {
                 self.height = block.height;
                 resolve(block);
              }
@@ -230,7 +230,7 @@ class Blockchain {
             if (errorLog.length > 0) {
                 resolve(errorLog);
             }
-            resolve(true);
+            resolve({ success: true, message: 'Chain valid'});
         });
     }
 

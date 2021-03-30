@@ -114,9 +114,22 @@ class BlockchainController {
             } else {
                 return res.status(500).send("Block Not Found! Review the Parameters!");
             }
-            
         });
     }
+
+        // This endpoint allows you to validate chain
+        validateChain() {
+            this.app.get("/validateChain", async (req, res) => {
+                try {
+                    let results = await this.blockchain.validateChain();
+                    if(results){
+                        return res.status(200).json(results);
+                    }
+                } catch (error) {
+                    return res.status(500).send("An error happened!");
+                }
+            });
+        }
 
 }
 
