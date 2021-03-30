@@ -184,11 +184,9 @@ class Blockchain {
      */
     getStarsByWalletAddress(address) {
         let self = this;
-        console.log('this chain', this.chain)
         let stars = [];
         return new Promise((resolve, reject) => {
             stars = self.chain;
-            console.log('self.chain', self.chain);
             stars = stars.map((star) => {            
                 star = JSON.parse(hex2ascii(star.body));
                 if (star.address === address) {
